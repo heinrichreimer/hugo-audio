@@ -1,73 +1,116 @@
-# hugo-video
+# 🎧 hugo-audio
 
-<!-- [![Awesome](https://awesome.re/badge.svg)](https://github.com/budparr/awesome-hugo) -->
-
-## About
-
-This [Hugo](https://gohugo.io) theme component provides a shortcode: `video` for embedding videos using the [HTML video element](https://devdocs.io/html/element/video).
-
-It comes with english, french, german, russian, japanese, korean and polish localization. Other languages welcome! Send your pull request.
+A Hugo theme component to embed sounds using the HTML audio element.
 
 ## Features
 
-This shortcode uses Hugo [Page Resources](https://gohugo.io/content-management/page-resources/). The video to display __must be placed in the [page bundle](https://gohugo.io/content-management/page-bundles/)__.
+This [Hugo](https://gohugo.io) theme component provides a shortcode `audio` for embedding sounds using the [HTML audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio).
 
-The shortcode takes one mandatory argument: the filename of the video file to display, __without the extension__. It detects automatically if several versions of the file exists in the page bundle, and add accordingly the multiple `src` tags. When an image file with the same filename is also present in the page bundle, it is automatically used as a poster frame.
+- Languages: English and German ([more languages](https://github.com/heinrichreimer/hugo-audio/pulls) are welcome!)
+- Fallback to a localized download notice if the browser doesn't support the [HTML audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
+- Supported audio formats:
+  - MP3 (extension `.mp3`)
 
-When the browser doesn't support the [HTML video element](https://devdocs.io/html/element/video), the shortcode displays a localized notice allowing the video download for local playing.
+## Installation
 
-Following video formats are supported:
-- MP4 (extension `.mp4` or `.m4v`)
-- WebM, (extension `.webm`)
-- Ogg, (extension `.ogv`)
+The best way to install this component is as a Hugo module:
 
-Default values:
-- Browser's default controls are displayed (`controls` attribute is always included)
-- Video can be preloaded (`preload="auto"` attribute is always included)
-- Video width is 100% (`width="100%"` attribute is included); this can be changed by indicating the desired width when calling the shortcode, see example below)
-- Video height attribute is not set by default, but can be explicitly set by indicating the desired height in pixels (i.e. `height="640"`); credit goes to Evgeny Kuznetsov for this feature
-- Following other video attributes can be set: `muted="true"`, `autoplay="true"` and `loop="true"`. Credit goes to Tom McKenzie for this feature
-- Default settings are used for other video attributes
+1. Initialize your existing site as Hugo module:
 
-When no video file of the given name is found in the supported format (see above), the shortcode __intentionally fails__ with a `No valid video file with filename <filename> found.` error.
+    ```shell
+    hugo mod init github.com/<USERNAME>/<REPO>
+    ```
+
+2. Add the hugo-audio component as a Hugo module:
+
+    ```shell
+    hugo mod get github.com/heinrichreimer/hugo-audio
+    ```
+
+3. In your site's or theme's configuration file, add a `module` section and define both `hugo-audio` and your currently used theme as modules to be imported.
+
+    Here is an example, with a YAML configuration file:
+
+    ```yaml
+    module:
+      imports:
+        - path: github.com/heinrichreimer/hugo-audio
+        - path: my-theme
+    ```
+
+    With a TOML configuration file, it should look like this:
+
+    ```toml
+    [module]
+      [[module.imports]]
+        path = "github.com/heinrichreimer/hugo-audio"
+      [[module.imports]]
+        path = "my-theme"
+    ```
+
+<details><summary>But it can also be installed as a Git module.</summary>
+
+1. Add this repository as a submodule like this:
+
+    ```shell
+    git submodule add https://github.com/heinrichreimer/hugo-audio.git themes/hugo-audio
+    ```
+
+2. Add `hugo-audio` as the leftmost element of the `theme` list in your site's or theme's configuration file:
+
+    Here is an example, with a YAML configuration file:
+
+    ```yaml
+    theme: ["hugo-audio", "my-theme"]
+    ```
+
+    With a TOML configuration file, it should look like this:
+
+    ```toml
+    theme = ["hugo-audio", "my-theme"]
+    ```
+
+</details>
 
 ## Usage
 
-1. Add the `hugo-video` as a submodule to be able to get upstream changes later
-    ```bash
-    git submodule add https://github.com/martignoni/hugo-video.git themes/hugo-video
-    ```
-2. Add `hugo-video` as the left-most element of the `theme` list variable in your site's or theme's configuration file `config.yaml` or `config.toml`. Example, with `config.yaml`:
-    ```yaml
-    theme: ["hugo-video", "my-theme"]
-    ```
-    or, with `config.toml`,
-    ```toml
-    theme = ["hugo-video", "my-theme"]
-    ```
-3. Place your video file(s) in the [page bundle](https://gohugo.io/content-management/page-bundles/) of your post.
-4. In your site, use the shortcode, this way, indicating the video filename __without its extension__. If your video file is `my-beautiful-screencast.mp4`, type this:
-    ```go
-    {{< video src="my-beautiful-screencast" >}}
-    ```
-    or
-    ```go
-    {{< video src="my-beautiful-screencast" width="600px" >}}
-    ```
+This shortcode uses Hugo [Page Resources](https://gohugo.io/content-management/page-resources/).
 
-### Thanks
+So first place the audio to be played in the [page bundle](https://gohugo.io/content-management/page-bundles/) of the page where you want to use the shortcode.
 
-- To [Tom McKenzie](https://github.com/grrowl), for implementing `muted`, `autoplay` and `loop` video attributes support.
-- To [Olaf Haag](https://github.com/OlafHaag), [Paul Lettington](https://github.com/plett) and [Christian Mahnke](https://github.com/cmahnke), for raising and fixing some bugs.
-- To [Arsenii Lyashenko](https://github.com/ark0f), for implementing `controls` disabling option and for providing the russian localization.
-- To [Evgeny Kuznetsov](https://github.com/nekr0z), for implementing `height` optional attribute.
-- To [Genji Fujimori](https://github.com/ahandsel), for providing the japanese localization.
-- To [Junho Park](https://github.com/cnaa97), for providing the korean localization.
-- To [Dominik Palula](https://github.com/D00NIK), for providing the polish localization.
+In the page source file, then use the shortcode like this, indicating the audio filename _without_ its extension:
 
-### Licence
+```go
+{{< audio src="my-cool-sound" >}}
+```
 
-Copyright © 2019 onwards, Nicolas Martignoni nicolas@martignoni.net.
+This will reference the file `my-cool-sound.mp3`, for example.
+... or with a fixed width:
+
+```go
+{{< audio src="my-cool-sound" width="600px" >}}
+```
+
+The shortcode takes one mandatory argument: the filename of the audio file to play _without_ the extension.
+The component automatically detects if several versions of the file exist in the page bundle and accordingly adds multiple `src` tags.
+If no audio file of the given name is found in the supported format (see above), the shortcode _intentionally fails_ with a `No valid audio file with filename <filename> found.` error.
+
+### Defaults
+
+- The web browser's default audio controls are displayed (`controls` attribute is always included).
+- Audio can be preloaded (`preload="auto"` attribute is always included).
+- Audio width is 100% (`width="100%"` attribute is included). Can be changed by explicitly specifying the width in the shortcode.
+- The following other audio attributes can be set: `muted="true"`, `autoplay="true"` and `loop="true"`.
+- Default settings are used for all other audio attributes.
+
+## Acknowledgments
+
+- [Nicolas Martignoni](https://github.com/martignoni), for the [hugo-video](https://github.com/martignoni/hugo-video) shortcode on which this shortcode is based.
+- [Tom McKenzie](https://github.com/grrowl), for implementing `muted`, `autoplay` and `loop` audio attributes support.
+- [Olaf Haag](https://github.com/OlafHaag), [Paul Lettington](https://github.com/plett) and [Christian Mahnke](https://github.com/cmahnke), for raising and fixing some bugs.
+- [Arsenii Lyashenko](https://github.com/ark0f), for implementing `controls` disabling option.
+
+## License
 
 All the source code is licensed under GPL 3 or any later version
 

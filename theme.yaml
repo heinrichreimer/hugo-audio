@@ -1,20 +1,18 @@
-# theme.yaml configuration file
-
-name: Video embedding
+name: Audio embedding
 license: GPLv3
-licenselink: https://github.com/martignoni/hugo-video/blob/master/LICENSE
-description: Hugo theme component to embed videos
-homepage: https://github.com/martignoni/hugo-video
+licenselink: https://github.com/heinrichreimer/hugo-audio/blob/master/LICENSE
+description: Hugo theme component to embed sounds.
+homepage: https://github.com/heinrichreimer/hugo-audio
 tags:
   - component
-  - video
+  - audio
   - embed
   - multilingual
 features:
-  - simple video embedding
+  - simple audio embedding
   - multilingual (en, fr, de, ru, ja, ko, po)
 min_version: 0.40.0
 
 author:
-  name: Nicolas Martignoni
-  homepage: https://martignoni.net
+  name: Jan Heinrich Reimer
+  homepage: https://heinrich.reimer.family

@@ -1,0 +1,38 @@
+{{- $audio_src := .Get "src" -}}
+{{- $audio_mp3 := "" -}}
+{{- $audio_dl := "" -}}
+{{- $width := "100%" -}}
+{{- $filenotfound := true -}}
+{{- $unsupportedfile := true -}}
+
+{{- /* Find all files with filename (without suffix) matching "src" parameter. */ -}}
+{{- $audio_files := (.Page.Resources.Match (printf "%s*" $audio_src)) -}}
+
+{{- /* Find first image file with filename (without suffix) matching "src" parameter. */ -}}
+{{- $poster := ((.Page.Resources.ByType "image").GetMatch (printf "%s*" $audio_src)) -}}
+
+{{- /* Find in page bundle all valid audio files with matching name. */ -}}
+{{- with $audio_files -}}
+  {{- $filenotfound = false -}}
+  {{- range . -}}
+    {{- if (in .MediaType.Suffixes "mp3") -}}
+      {{- $unsupportedfile = false -}}
+      {{- $audio_mp3 = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $filenotfound -}}
+  {{- /* No file of given name was found, we stop here. */ -}}
+  {{- errorf "No file with filename %q found." $audio_src -}}
+{{- else if $unsupportedfile -}}
+  {{- errorf "No valid audio file with filename %q found." $audio_src -}}
+{{- else -}}
+<audio {{ if ne (.Get "controls") "false" }}controls {{ end }}preload="auto" width="{{ or (.Get "width") $width }}" {{ with .Get "height" }}height="{{.}}"{{ end }} {{ if eq (.Get "autoplay") "true" }}autoplay {{ end }}{{ if eq (.Get "loop") "true" }}loop {{ end }}{{ if eq (.Get "muted") "true" }}muted {{ end }}playsinline>
+  {{- with $audio_mp3 }}
+    <source src="{{ .RelPermalink }}" type="audio/mp3">
+    {{- $audio_dl = . -}}
+  {{- end }}
+  <span>{{ i18n "audioUnsupported" $audio_dl | safeHTML}}</span>
+</audio>
+{{- end -}}
