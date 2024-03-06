@@ -1,2 +1,2 @@
-- id: videoUnsupported
-  translation: "Ihr Browser unterstützt keine integrierten Videos, aber keine Sorge, Sie können <a href=\"{{ .RelPermalink }}\">es herunterladen</a> und mit Ihrem Lieblings-Videoplayer ansehen!"
+- id: audioUnsupported
+  translation: "Ihr Browser unterstützt kein integriertes Audio, aber keine Sorge, Sie können <a href=\"{{ .RelPermalink }}\">es herunterladen</a> und mit Ihrem Lieblings-Audioplayer ansehen."
