@@ -6,7 +6,7 @@ A Hugo theme component to embed sounds using the HTML audio element.
 
 This [Hugo](https://gohugo.io) theme component provides a shortcode `audio` for embedding sounds using the [HTML audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio).
 
-- Languages: English and German ([more languages](https://github.com/heinrichreimer/hugo-audio/pulls) are welcome!)
+- Languages: English and German ([more languages](https://github.com/janheinrichmerker/hugo-audio/pulls) are welcome!)
 - Fallback to a localized download notice if the browser doesn't support the [HTML audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
 - Supported audio formats:
   - MP3 (extension `.mp3`)
@@ -24,7 +24,7 @@ The best way to install this component is as a Hugo module:
 2. Add the hugo-audio component as a Hugo module:
 
     ```shell
-    hugo mod get github.com/heinrichreimer/hugo-audio
+    hugo mod get github.com/janheinrichmerker/hugo-audio
     ```
 
 3. In your site's or theme's configuration file, add a `module` section and define both `hugo-audio` and your currently used theme as modules to be imported.
@@ -34,7 +34,7 @@ The best way to install this component is as a Hugo module:
     ```yaml
     module:
       imports:
-        - path: github.com/heinrichreimer/hugo-audio
+        - path: github.com/janheinrichmerker/hugo-audio
         - path: my-theme
     ```
 
@@ -43,7 +43,7 @@ The best way to install this component is as a Hugo module:
     ```toml
     [module]
       [[module.imports]]
-        path = "github.com/heinrichreimer/hugo-audio"
+        path = "github.com/janheinrichmerker/hugo-audio"
       [[module.imports]]
         path = "my-theme"
     ```
@@ -53,7 +53,7 @@ The best way to install this component is as a Hugo module:
 1. Add this repository as a submodule like this:
 
     ```shell
-    git submodule add https://github.com/heinrichreimer/hugo-audio.git themes/hugo-audio
+    git submodule add https://github.com/janheinrichmerker/hugo-audio.git themes/hugo-audio
     ```
 
 2. Add `hugo-audio` as the leftmost element of the `theme` list in your site's or theme's configuration file:

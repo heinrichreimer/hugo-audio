@@ -1,8 +1,8 @@
 name: Audio embedding
 license: GPLv3
-licenselink: https://github.com/heinrichreimer/hugo-audio/blob/master/LICENSE
+licenselink: https://github.com/janheinrichmerker/hugo-audio/blob/master/LICENSE
 description: Hugo theme component to embed sounds.
-homepage: https://github.com/heinrichreimer/hugo-audio
+homepage: https://github.com/janheinrichmerker/hugo-audio
 tags:
   - component
   - audio
@@ -14,5 +14,5 @@ features:
 min_version: 0.40.0
 
 author:
-  name: Jan Heinrich Reimer
-  homepage: https://heinrich.reimer.family
+  name: Jan Heinrich Merker
+  homepage: https://heinrich.merker.id
